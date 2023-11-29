@@ -1,0 +1,32 @@
+<!-- ベーステンプレートを適用する -->
+{%  extends 'base.html' %}
+<!-- ヘッダー情報のページタイトルを設定する -->
+{% block title %}コメント投稿{% endblock %}
+{% load static widget_tweaks %}
+
+    {% block contents %}
+    <!-- 記事タイトルを表示 -->
+    <h3 class="titleline"><font color="#0000cd">{{ post.title }}</font></h3>
+    <h2 align="center"><font color="#808080">コメントページ</font></h2>
+
+
+    <form action="" method="POST" id="message-form">{% csrf_token %}
+    <div class="container">
+        <div class="row" align="center">
+            <div>
+                <p>
+                <h5>名前</h5>
+                {% render_field form.user_name class+="form-control w-50 mb-4" placeholder="名前を入力" %}
+                <h5>本文</h5>
+                {% render_field form.message class+="form-control w-50 mb-4" placeholder="コメントを記入" %}
+                </p>
+            </div>
+        </div>
+        <hr>
+        <button type="submit" 
+            class="btn btn-primary col-3 offset-2">投稿する</button>
+        <a class="btn btn-danger col-3 offset-2" 
+            href="{% url 'photo:photo_detail' post.pk %}">キャンセル</a>
+        </form>
+    </div>
+    {% endblock %}

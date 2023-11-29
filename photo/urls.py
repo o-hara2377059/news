@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import DetailView, MessagePostView
 
 # URLパターンを逆引きできるように名前を付ける
 app_name = 'photo'
@@ -40,6 +41,10 @@ urlpatterns = [
          views.DetailView.as_view(),
          name = 'photo_detail'
          ),
+
+    path('photo-message/<int:pk>/', 
+           views.MessagePostView.as_view(), 
+           name='photo_message'),
 
     #マイページ
     #mypage/へのアクセスはMypageViewを実行

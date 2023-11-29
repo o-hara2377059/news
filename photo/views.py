@@ -1,20 +1,21 @@
 from typing import Any
+from django import forms
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 # django.views.genericからTemplateView,ListViewをインポート
 from django.views.generic import TemplateView, ListView
 # django.views.genericからCreateViewをインポート
-from django.views.generic import CreateView
+from django.views.generic.edit import CreateView
 # django.urlsからreverse_lazyをインポート
 from django.urls import reverse_lazy
 # formsモジュールからPhotoPostFormをインポート
-from .forms import PhotoPostForm
+from .forms import PhotoPostForm, MessagePostForm
 # method_decoratorをインポート
 from django.utils.decorators import method_decorator
 # login_requiredをインポート
 from django.contrib.auth.decorators import login_required
 # modelsモジュールからモデルPhotoPostをインポート
-from .models import PhotoPost
+from .models import PhotoPost, MessagePost
 # django.views.genericからDetailViewをインポート
 from django.views.generic import DetailView
 # django.views.genericからDeleteViewをインポート
@@ -215,3 +216,24 @@ class PhotoDeleteView(DeleteView):
         '''
         #　スーパークラスのdelete()を実行
         return super().delete(request, *args, **kwargs)
+
+#コメント投稿ページのビュー
+class MessagePostView(CreateView):
+    template_name = 'messagepost_form.html'
+    model = MessagePost
+    form_class = MessagePostForm
+
+ #フォームに入力された情報が正しい場合の処理
+    def form_valid(self, form):
+        post_pk = self.kwargs['pk']
+        post = get_object_or_404(PhotoPost, pk=post_pk)
+        message = form.save(commit=False)
+        message.target = post
+        message.save()
+        return redirect('photo:photo_detail', pk=post_pk)
+
+ #htmlテンプレートに渡すデータを定義
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post'] = get_object_or_404(PhotoPost, pk=self.kwargs['pk'])
+        return context

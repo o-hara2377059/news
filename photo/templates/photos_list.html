@@ -33,13 +33,18 @@
                   <!-- 詳細ページを表示するボタン -->
                   <button type="button"
                           class="btn btn-sm btn-outline-secondary"
-                          oneclick="location.href='{% url 'photo:photo_detail' record.pk %}'">
+                          onclick="location.href='{% url 'photo:photo_detail' record.pk %}'">
                           View</button>
                   <!-- カテゴリを表示するボタン -->
                   <button type="button"
                           class="btn btn-sm btn-outline-secondary"
-                          oneclick="location.href='{% url 'photo:photos_cat' category=record.category.id %}'">
+                          onclick="location.href='{% url 'photo:photos_cat' category=record.category.id %}'">
                           {{record.category.title}}</button>
+                  <!-- コメントを投稿するボタン -->
+                  <button type="button"
+                          class="btn btn-sm btn-outline-secondary"
+                          onclick="location.href='{% url 'photo:photo_message' record.pk %}'">
+                          コメントする</button>
                 </div>
                 <!-- 投稿したユーザー名を出力 -->
                 <a href="{% url 'photo:user_list' user=record.user.id %}">

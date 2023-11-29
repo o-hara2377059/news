@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'photo.apps.PhotoConfig',
     # accountsアプリを追加する
     'accounts.apps.AccountsConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 #メール送信のためのクラスを設定
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #メールサーバーへの接続設定
@@ -140,7 +140,7 @@ DEFAULT_FROM_EMAIL = 'utm2377059@stu.o-hara.ac.jp' #メールの送信元のア�
 EMAIL_HOST = 'smtp.office365.com' #outlookのSMTPサーバー
 EMAIL_PORT = 587 #outlookのポート番号
 EMAIL_HOST_USER = 'utm2377059@stu.o-hara.ac.jp' #outlookのアドレス
-EMAIL_HOST_PASSWORD = '999mil87milB' #outlookのアプリ用のパスワード
+EMAIL_HOST_PASSWORD = 'ab' #outlookのアプリ用のパスワード
 EMAIL_USE_TLS = True #SMTPサーバーと通信する際にTLS(セキュア)接続を使う
 
 #mediaフォルダーの場所(BASE_DIR以下のmedia)を登録

@@ -3,7 +3,7 @@ from django.db import models
 from accounts.models import CustomUser
 
 class Category(models.Model):
-    '''投稿する写真のカテゴリを管理するモデル
+    '''投稿するニュースのカテゴリを管理するモデル
     '''
     #カテゴリ名のフィールド
     title = models.CharField(
@@ -46,9 +46,9 @@ class PhotoPost(models.Model):
         verbose_name='タイトル',#フィールドのタイトル
         max_length=200         #最大文字数は200
     )
-    #コメント用のフィールド
+    #内容用のフィールド
     comment = models.TextField(
-        verbose_name='コメント',#フィールドのタイトル
+        verbose_name='内容',#フィールドのタイトル
     )
     #イメージのフィールド１
     image1 = models.ImageField(
@@ -74,3 +74,18 @@ class PhotoPost(models.Model):
         Returns(str):投稿記事のタイトル
         '''
         return self.title
+    
+class MessagePost(models.Model):
+    '''コメントを管理するモデル
+    '''
+    #名前用のフィールド
+    user_name = models.CharField('名前', max_length=100, default='名無し')
+    #本文用のフィールド
+    message = models.TextField('本文')
+    #対象記事用のフィールド
+    target = models.ForeignKey(PhotoPost, on_delete=models.CASCADE, verbose_name='対象記事')
+    #作成日時用のフィールド
+    created_at = models.DateTimeField('コメント日', auto_now_add=True)
+
+    def __str__(self):
+        return self.message[:20]

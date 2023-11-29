@@ -8,6 +8,7 @@ class CustomUserCreationForm(UserCreationForm):
     '''
     class Meta:
         '''UserCreationFormのインナークラス
+
         Attributes:
             model:連携するUserモデル
             fields:フォームで使用するフィールド
@@ -16,4 +17,4 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         #フォームで使用するフィールドを設定
         #ユーザー名、メールアドレス、パスワード、パスワード（確認要）
-        fields = ('username','email','password','password2')
+        fields = ('username','email','password1','password2')

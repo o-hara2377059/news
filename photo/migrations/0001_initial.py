@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200, verbose_name='タイトル')),
-                ('comment', models.TextField(verbose_name='コメント')),
+                ('comment', models.TextField(verbose_name='内容')),
                 ('image1', models.ImageField(upload_to='photos', verbose_name='イメージ1')),
                 ('image2', models.ImageField(blank=True, null=True, upload_to='photos', verbose_name='イメージ2')),
                 ('posted_at', models.DateField(auto_now_add=True, verbose_name='投稿日時')),
